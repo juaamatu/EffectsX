@@ -54,19 +54,19 @@
 				float4 x = float4(0, 0, 0, 0);
 				float4 y = float4(0, 0, 0, 0);
 
-				x += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, 1) * dist));		// TL
-				x += -Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, 1) * dist));		// TR
-				x += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, 0) * dist)) * -2;	// R
-				x += -Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, -1) * dist));		// BR
-				x += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, -1) * dist));		// BL
-				x += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, 0) * dist)) * 2;	// L
+				x += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, 1) * dist));			// TL
+				x -= Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, 1) * dist));			// TR
+				x -= Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, 0) * dist)) * 2;		// R
+				x -= Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, -1) * dist));			// BR
+				x += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, -1) * dist));			// BL
+				x += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, 0) * dist)) * 2;		// L
 
-				y += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, 1) * dist));		// TL
-				y += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(0, 1) * dist)) * 2;	// T
-				y += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, 1) * dist));		// TR
-				y += -Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, -1) * dist));		// BR
-				y += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(0, -1) * dist)) * -2;	// B
-				y += -Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, -1) * dist));		// BL
+				y += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, 1) * dist));			// TL
+				y += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(0, 1) * dist)) * 2;		// T
+				y += Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, 1) * dist));			// TR
+				y -= Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(1, -1) * dist));			// BR
+				y -= Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(0, -1) * dist)) * 2;		// B
+				y -= Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, -1) * dist));			// BL
 
 				float magnitude = sqrt(x * x + y * y);
 				magnitude = step(_Threshold, magnitude);
