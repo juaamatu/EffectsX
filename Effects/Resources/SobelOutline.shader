@@ -69,7 +69,7 @@
 				y -= Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv + float2(-1, -1) * dist));			// BL
 
 				float magnitude = sqrt(x * x + y * y);
-				magnitude = step(_Threshold, magnitude);
+				magnitude = step(_Threshold * _ProjectionParams.w, magnitude);
 				return lerp(float4(0, 0, 0, 0), _Color, magnitude);
 			}
 			ENDCG
